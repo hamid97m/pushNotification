@@ -1,9 +1,9 @@
 package com.pushnotification.pushnotification
 
-import android.support.v7.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import com.google.firebase.iid.FirebaseInstanceId
+import android.support.v7.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,6 +12,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.i("firebaseToken", FirebaseInstanceId.getInstance().getToken())
+        val sharedPref = getSharedPreferences("fcm",Context.MODE_PRIVATE) ?: return
+        with(sharedPref) {
+            edt_fcm.setText(getString("fcm", ""))
+        }
     }
 }
